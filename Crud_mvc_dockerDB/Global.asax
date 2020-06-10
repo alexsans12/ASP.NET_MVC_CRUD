@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Crud_mvc_dockerDB.MvcApplication" Language="C#" %>

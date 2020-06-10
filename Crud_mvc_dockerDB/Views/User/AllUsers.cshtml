@@ -1,0 +1,25 @@
+@model List<Crud_mvc_dockerDB.Models.Class.User>
+@{
+    ViewBag.Title = "Lista de Usuarios";
+}
+
+<h2>List Users</h2>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var objUser in Model)
+    {
+        <tr>
+            <td scope="row">@objUser.idUser</td>
+            <td>@objUser.name</td>
+            <td>@objUser.email</td>
+        </tr>
+    }
+    </tbody>
+</table>
