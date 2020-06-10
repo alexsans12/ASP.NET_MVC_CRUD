@@ -1,0 +1,37 @@
+@model Crud_mvc_dockerDB.Models.Class.User
+@{
+    ViewBag.Title = "Create user";
+}
+
+
+
+@Html.ActionLink("Return", "All", "User",null, htmlAttributes: new { @class = "btn btn-info", @style = "margin-top: 15px;" })
+<h2>Create a new user</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(model=> model.name, "Name")
+        @Html.TextBoxFor(model=>model.name, htmlAttributes: new { @class = "form-control", @required = "required" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model=> model.email, "Email")
+        @Html.TextBoxFor(model=>model.email, htmlAttributes: new { @class = "form-control", @type = "email", @required = "required" })
+    </div>
+    <input class="btn btn-success" type="submit" name="btnSave" value="Save"/>
+}
+
+@if (@ViewBag.errorMessage != null)
+{
+    <br/>
+    <div class="alert alert-danger">
+        @ViewBag.errorMessage
+    </div>
+}
+
+@if (@ViewBag.successMessage != null)
+{
+    <br/>
+    <div class="alert alert-success">
+        @ViewBag.successMessage
+    </div>   
+}

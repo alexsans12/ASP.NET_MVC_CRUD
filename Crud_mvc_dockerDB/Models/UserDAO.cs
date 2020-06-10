@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Crud_mvc_dockerDB.Controllers;
 using Crud_mvc_dockerDB.Models.Class;
 
 namespace Crud_mvc_dockerDB.Models
@@ -40,7 +39,7 @@ namespace Crud_mvc_dockerDB.Models
 
         public void update(User objUser)
         {
-            string update = "UPDATE users SET name = '" + objUser.name + "', email = '" + objUser.email + "' WHERE id = " + objUser.idUser + " ";
+            string update = "UPDATE users SET name = '" + objUser.name + "', email = '" + objUser.email + "' WHERE id = '" + objUser.idUser + "'";
             try
             {
                 cmd = new SqlCommand(update, objConnection.GetConnection());
@@ -62,11 +61,11 @@ namespace Crud_mvc_dockerDB.Models
 
         public void delete(User objUser)
         {
-            string delete = "DELETE FROM users WHERE id = " + objUser.idUser + " ";
+            string delete = "DELETE FROM users WHERE id = '" + objUser.idUser + "'";
             try
             {
                 cmd = new SqlCommand(delete, objConnection.GetConnection());
-                objConnection.GetConnection().Close();
+                objConnection.GetConnection().Open();
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -82,10 +81,10 @@ namespace Crud_mvc_dockerDB.Models
             }
         }
 
-        public bool find(User objUser)
+        public User find(User objUser)
         {
             bool findUser = false;
-            string find = "SELECT * FROM users WHERE id = "+ objUser.idUser +"";
+            string find = "SELECT * FROM users WHERE id = '" + objUser.idUser + "'";
 
             try
             {
@@ -99,6 +98,11 @@ namespace Crud_mvc_dockerDB.Models
                     objUser.idUser = Convert.ToInt32(read[0].ToString());
                     objUser.name = read[1].ToString();
                     objUser.email = read[2].ToString();
+                    objUser.state = 99;
+                }
+                else
+                {
+                    objUser.state = 0;
                 }
             }
             catch(Exception ex)
@@ -107,8 +111,13 @@ namespace Crud_mvc_dockerDB.Models
                 Console.WriteLine("\nHelpLink ---\n{0}", ex.HelpLink);
                 Console.WriteLine("\nSource ---\n{0}", ex.Source);
             }
+            finally
+            {
+                objConnection.GetConnection().Close();
+                objConnection.closeConnection();
+            }
             
-            return findUser;
+            return objUser;
         }
 
         public List<User> findAll()
@@ -136,6 +145,11 @@ namespace Crud_mvc_dockerDB.Models
                 Console.WriteLine("\nMessage ---\n{0}", ex.Message);
                 Console.WriteLine("\nHelpLink ---\n{0}", ex.HelpLink);
                 Console.WriteLine("\nSource ---\n{0}", ex.Source);
+            }
+            finally
+            {
+                objConnection.GetConnection().Close();
+                objConnection.closeConnection();
             }
 
             return listUsers;

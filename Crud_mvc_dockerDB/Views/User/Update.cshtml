@@ -1,0 +1,29 @@
+@model Crud_mvc_dockerDB.Models.Class.User
+@{
+    ViewBag.Title = "Update user";
+}
+
+
+@Html.ActionLink("Return", "All", "User", null, htmlAttributes: new { @class = "btn btn-info", @style = "margin-top: 15px;" })
+<h2>Update user @Model.name</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.idUser);
+    <div class="form-group">
+        @Html.LabelFor(model=> model.name, "Name")
+        @Html.TextBoxFor(model=>model.name, htmlAttributes: new { @class = "form-control", @required = "required", @value = Model.name })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model=> model.email, "Email")
+        @Html.TextBoxFor(model=>model.email, htmlAttributes: new { @class = "form-control", @type = "email", @required = "required", @value = Model.email })
+    </div>
+    <input class="btn btn-success" type="submit" name="btnSave" value="Save"/>
+}
+
+@if (@ViewBag.errorMessage != null)
+{
+    <br/>
+    <div class="alert alert-danger">
+        @ViewBag.errorMessage
+    </div>
+}

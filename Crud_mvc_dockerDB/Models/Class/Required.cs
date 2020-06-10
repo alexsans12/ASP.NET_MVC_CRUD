@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Crud_mvc_dockerDB.Models.Class;
 
 namespace Crud_mvc_dockerDB.Models
 {
@@ -7,7 +8,7 @@ namespace Crud_mvc_dockerDB.Models
         void create(anyclass obj);
         void update(anyclass obj);
         void delete(anyclass obj);
-        bool find(anyclass obj);
+        User find(anyclass obj);
         List<anyclass> findAll();
     }
 }

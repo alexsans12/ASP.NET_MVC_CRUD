@@ -1,0 +1,34 @@
+@model List<Crud_mvc_dockerDB.Models.Class.User>
+@{
+    ViewBag.Title = "List users";
+}
+<h2>List users</h2>
+<div style="margin: 10px;">
+    <a class="btn btn-primary" href="~/User/Create">New user</a>
+</div>
+<table class="table table-responsive table-hover table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col" colspan="2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var objUser in Model)
+    {
+        <tr>
+            <td scope="row">@objUser.idUser</td>
+            <td>@objUser.name</td>
+            <td>@objUser.email</td>
+            <td style="text-align: center;">
+                <a class="btn btn-warning" href="~/User/Update/@objUser.idUser"><i class="fas fa-pencil-alt"></i></a>
+            </td>
+            <td style="text-align: center;">
+                <a class="btn btn-danger" href="~/User/Delete/@objUser.idUser"><i class="far fa-trash-alt"></i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
