@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  oracle-11g-db:
+    container_name: oracle-11g-db
+    image: leoevasconcelos/11g-xe
+    ports:
+      - "1521:1521"
