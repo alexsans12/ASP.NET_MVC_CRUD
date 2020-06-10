@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Oracle.ManagedDataAccess.Client;
 using Crud_mvc_dockerDB.Models.Class;
 
 namespace Crud_mvc_dockerDB.Models
@@ -8,7 +8,7 @@ namespace Crud_mvc_dockerDB.Models
     public class UserDAO : Required<User>
     {
         private Connection objConnection;
-        private SqlCommand cmd;
+        private OracleCommand cmd;
 
         public UserDAO()
         {
@@ -20,7 +20,7 @@ namespace Crud_mvc_dockerDB.Models
             string create = "INSERT INTO users(name,email) VALUES('" + objUser.name + "', '" + objUser.email + "')";
             try
             {
-                cmd = new SqlCommand(create, objConnection.GetConnection());
+                cmd = new OracleCommand(create, objConnection.GetConnection());
                 objConnection.GetConnection().Open();
                 cmd.ExecuteNonQuery();
             }
@@ -42,7 +42,7 @@ namespace Crud_mvc_dockerDB.Models
             string update = "UPDATE users SET name = '" + objUser.name + "', email = '" + objUser.email + "' WHERE id = '" + objUser.idUser + "'";
             try
             {
-                cmd = new SqlCommand(update, objConnection.GetConnection());
+                cmd = new OracleCommand(update, objConnection.GetConnection());
                 objConnection.GetConnection().Open();
                 cmd.ExecuteNonQuery();
             }
@@ -64,7 +64,7 @@ namespace Crud_mvc_dockerDB.Models
             string delete = "DELETE FROM users WHERE id = '" + objUser.idUser + "'";
             try
             {
-                cmd = new SqlCommand(delete, objConnection.GetConnection());
+                cmd = new OracleCommand(delete, objConnection.GetConnection());
                 objConnection.GetConnection().Open();
                 cmd.ExecuteNonQuery();
             }
@@ -88,9 +88,9 @@ namespace Crud_mvc_dockerDB.Models
 
             try
             {
-                cmd = new SqlCommand(find, objConnection.GetConnection());
+                cmd = new OracleCommand(find, objConnection.GetConnection());
                 objConnection.GetConnection().Open();
-                SqlDataReader read = cmd.ExecuteReader();
+                OracleDataReader read = cmd.ExecuteReader();
                 findUser = read.Read();
 
                 if (findUser)
@@ -127,9 +127,9 @@ namespace Crud_mvc_dockerDB.Models
 
             try
             {
-                cmd = new SqlCommand(findAll, objConnection.GetConnection());
+                cmd = new OracleCommand(findAll, objConnection.GetConnection());
                 objConnection.GetConnection().Open();
-                SqlDataReader read = cmd.ExecuteReader();
+                OracleDataReader read = cmd.ExecuteReader();
 
                 while (read.Read())
                 {
@@ -142,9 +142,9 @@ namespace Crud_mvc_dockerDB.Models
             }
             catch (Exception ex)
             {
-                Console.WriteLine("\nMessage ---\n{0}", ex.Message);
-                Console.WriteLine("\nHelpLink ---\n{0}", ex.HelpLink);
-                Console.WriteLine("\nSource ---\n{0}", ex.Source);
+                Console.WriteLine("\nMessage findAll ---\n{0}", ex.Message);
+                Console.WriteLine("\nHelpLink findAll ---\n{0}", ex.HelpLink);
+                Console.WriteLine("\nSource findAll ---\n{0}", ex.Source);
             }
             finally
             {
@@ -154,5 +154,6 @@ namespace Crud_mvc_dockerDB.Models
 
             return listUsers;
         }
+        
     }
 }

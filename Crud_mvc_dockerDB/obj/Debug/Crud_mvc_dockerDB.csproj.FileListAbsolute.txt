@@ -53,3 +53,4 @@
 /Users/alex/RiderProjects/Crud_mvc_dockerDB/Crud_mvc_dockerDB/obj/Debug/Crud_mvc_dockerDB.csproj.CopyComplete
 /Users/alex/RiderProjects/Crud_mvc_dockerDB/Crud_mvc_dockerDB/obj/Debug/Crud_mvc_dockerDB.dll
 /Users/alex/RiderProjects/Crud_mvc_dockerDB/Crud_mvc_dockerDB/obj/Debug/Crud_mvc_dockerDB.pdb
+/Users/alex/RiderProjects/Crud_mvc_dockerDB/Crud_mvc_dockerDB/bin/Oracle.ManagedDataAccess.dll

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Crud_mvc_dockerDB.Models.Class;
 
-namespace Crud_mvc_dockerDB.Models
+namespace Crud_mvc_dockerDB.Models.Class
 {
     interface Required<anyclass>
     {

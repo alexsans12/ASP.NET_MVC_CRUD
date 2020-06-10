@@ -1,18 +1,20 @@
 using System;
 using System.Configuration;
-using System.Data.SqlClient;
+using Oracle.ManagedDataAccess.Client;
 
-namespace Crud_mvc_dockerDB.Models
+namespace Crud_mvc_dockerDB.Models.Class
 {
     public class Connection
     {
         //singlenton
         private static Connection objConnection = null;
-        private SqlConnection conn;
+        private OracleConnection conn;
 
         private Connection()
         {
-            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            string connectionString = "User Id=admin;Password=admin;Data Source=localhost:1521/XE;";
+            conn = new OracleConnection();
+            conn.ConnectionString = connectionString;
         }
 
         public static Connection connectionState()
@@ -25,7 +27,7 @@ namespace Crud_mvc_dockerDB.Models
             return objConnection;
         }
 
-        public SqlConnection GetConnection()
+        public OracleConnection GetConnection()
         {
             return conn;
         }
